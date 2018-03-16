@@ -33,6 +33,15 @@ class MoviesController < ApplicationController
     @movies = Movie.where(rating: @selected_ratings.keys).order(ordering)
   end
 
+  def find
+    @movie = Movie.find_by(title: params[:title])
+    director = @movie.director
+    if director.blank? or director.nil?
+      redirect_to movies_path, alert: "'#{params[:title]}' has no director info"
+    end
+    @similar_titles = Movie.where(director: director).pluck(:title)
+  end
+
   def new
     # default: render 'new' template
   end
