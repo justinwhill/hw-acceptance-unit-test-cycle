@@ -35,11 +35,10 @@ class MoviesController < ApplicationController
 
   def find
     @movie = Movie.find_by(title: params[:title])
-    director = @movie.director
-    if director.blank? or director.nil?
+    @similar_titles = Movie.similar_titles(params[:title])
+    if @similar_titles.nil?
       redirect_to movies_path, alert: "'#{params[:title]}' has no director info"
     end
-    @similar_titles = Movie.where(director: director).pluck(:title)
   end
 
   def new
