@@ -15,6 +15,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'ZenTest', '4.11.0'
+end
+
+group :development do
   gem 'web-console', '~> 2.0'
 end
 
